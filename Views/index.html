@@ -13,13 +13,13 @@
       #messages li:nth-child(odd) { background: #eee; }
     </style>
 	<script src="/socket.io/socket.io.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="http://localhost:3000/js/jquery"></script>
 	<script>
 		var socket = io();
 		$( document ).ready(function() {
 			$('#meh').click(function () { 
-		      //alert('ha');
 		      socket.emit('chert message', $('#m').val());
+		      $('#messages').append($('<li>').text($('#m').val()));
 		      $('#m').val('');
 		      return false;
 		    });

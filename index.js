@@ -3,7 +3,11 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/Views/index.html');
+  res.sendFile( __dirname + '/Views/index.html');
+});
+
+app.get('/js/jquery/', function(req, res){
+  res.sendFile( __dirname + '/js/jquery.min.js');
 });
 
 io.on('connection', function(socket){
@@ -14,12 +18,11 @@ io.on('connection', function(socket){
 
   socket.on('chert message', function(msg){
     console.log('message: ' + msg);
-    io.emit('chat message', msg);
+    //io.emit('chat message', msg);
+    socket.broadcast.emit('chat message', msg);
   });
-
-
 });
 
 http.listen(3000, function(){
-  console.log('listening on *:3000');
+  console.log('listening on http://localhost:3000/');
 });
